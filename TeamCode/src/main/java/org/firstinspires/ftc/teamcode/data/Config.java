@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class Configuration {
+public class Config {
 
     private static final String PREFERENCES = "RobotPref";
     private SharedPreferences sharedPreferences;
@@ -45,7 +45,7 @@ public class Configuration {
     public static final String LAUNCHER_ANGLE_HIGH = "LauncherAngleHigh";
     public static int launcherAngleHigh;
 
-    public Configuration(Context context) {
+    public Config(Context context) {
         sharedPreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
         this.load();
     }
