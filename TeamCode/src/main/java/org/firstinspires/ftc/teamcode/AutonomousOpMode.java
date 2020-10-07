@@ -43,6 +43,7 @@ public class AutonomousOpMode extends LinearOpMode {
 
     private Robot robot;
     private MecanumDrive drive;
+    private VuforiaManager vuforiaManager;
 
     @Override
     public void runOpMode() {
@@ -50,6 +51,9 @@ public class AutonomousOpMode extends LinearOpMode {
 
         robot = new Robot(hardwareMap);
         drive = new MecanumDrive(this, robot);
+
+        vuforiaManager = new VuforiaManager();
+        vuforiaManager.initialize(this);
 
         // Reset the encoders
         robot.setMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
