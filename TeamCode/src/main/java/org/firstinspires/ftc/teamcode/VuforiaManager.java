@@ -26,6 +26,7 @@ public class VuforiaManager implements Runnable {
 
     private Thread searchThread;
     private LinearOpMode linearOpMode;
+    private boolean shouldScan = false;
 
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = VuforiaLocalizer.CameraDirection.BACK;
     private static final boolean PHONE_IS_PORTRAIT = false;
@@ -45,6 +46,7 @@ public class VuforiaManager implements Runnable {
     // Class Members
     private OpenGLMatrix lastLocation = null;
     private VuforiaLocalizer vuforia = null;
+    private VuforiaTrackables targetsUltimateGoal;
 
     private List<VuforiaTrackable> allTrackables;
 
@@ -94,7 +96,7 @@ public class VuforiaManager implements Runnable {
 
         // Load the data sets for the trackable objects. These particular data
         // sets are stored in the 'assets' part of our application.
-        VuforiaTrackables targetsUltimateGoal = this.vuforia.loadTrackablesFromAsset("UltimateGoal");
+        targetsUltimateGoal = this.vuforia.loadTrackablesFromAsset("UltimateGoal");
         VuforiaTrackable blueTowerGoalTarget = targetsUltimateGoal.get(0);
         blueTowerGoalTarget.setName("Blue Tower Goal Target");
         VuforiaTrackable redTowerGoalTarget = targetsUltimateGoal.get(1);
@@ -205,21 +207,27 @@ public class VuforiaManager implements Runnable {
     }
 
     public void startScanning() {
+        this.shouldScan = true;
+
         searchThread = new Thread(this, "_Bravenators:VuforiaScanner_");
         searchThread.start();
     }
 
     public void stopScanning() {
+        this.shouldScan = false;
+
         try {
             searchThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        targetsUltimateGoal.deactivate();
     }
 
     @Override
     public void run() {
-        while (!linearOpMode.isStopRequested()) {
+        while (!linearOpMode.isStopRequested() && this.shouldScan) {
 
             // check all the trackable targets to see which one (if any) is visible.
             targetVisible = false;
@@ -257,4 +265,7 @@ public class VuforiaManager implements Runnable {
     }
 
     public OpenGLMatrix getLastLocation() { return lastLocation; }
+
+    public void setShouldScan(boolean value) { this.shouldScan = value; }
+    public boolean shouldScan() { return shouldScan; }
 }
