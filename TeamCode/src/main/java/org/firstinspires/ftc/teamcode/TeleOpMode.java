@@ -29,26 +29,77 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.common.FtcGamePad;
 import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.drive.MecanumDrive;
 
-@TeleOp(name="Bravenators Autonomous", group="Autonomous")
-public class Autonomous extends LinearOpMode {
+
+/**
+ * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
+ * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
+ * of the FTC Driver Station. When an selection is made from the menu, the corresponding OpMode
+ * class is instantiated on the Robot Controller and executed.
+ *
+ * This particular OpMode just executes a basic Tank Drive Teleop for a two wheeled robot
+ * It includes all the skeletal structure that all linear OpModes contain.
+ *
+ * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
+ * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
+ */
+
+@TeleOp(name="Teleop", group="Competition")
+public class TeleOpMode extends LinearOpMode implements FtcGamePad.ButtonHandler {
+
+    private ElapsedTime runtime = new ElapsedTime();
 
     private Robot robot;
     private MecanumDrive drive;
+
+    private FtcGamePad driverGamePad;
+    private FtcGamePad operatorGamePad;
 
     @Override
     public void runOpMode() {
         robot = new Robot(hardwareMap);
         drive = new MecanumDrive(this, robot);
 
+        // If autonomous was not run then reset encoders
+        if(!AutonomousOpMode.ranAutonomous) {
+            robot.setMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+
+        driverGamePad = new FtcGamePad("Driver", gamepad1, this);
+        operatorGamePad = new FtcGamePad("Operator", gamepad2, this);
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         waitForStart();
+        runtime.reset();
+
+        // TODO: Add in the control list
+
+        while (opModeIsActive()) {
+
+            drive.handle(driverGamePad);
+            driverGamePad.update();
+            operatorGamePad.update();
+
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.update();
+        }
+    }
+
+    @Override
+    public void gamepadButtonEvent(FtcGamePad gamepad, int button, boolean pressed) {
+        // TODO: Handle the operator gamepad.
     }
 }

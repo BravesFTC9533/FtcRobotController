@@ -42,7 +42,6 @@ public class Robot {
         this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        this.setMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
