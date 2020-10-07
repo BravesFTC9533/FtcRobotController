@@ -206,12 +206,12 @@ public class VuforiaManager implements Runnable {
 
     public void startScanning() {
         searchThread = new Thread(this, "_Bravenators:VuforiaScanner_");
-            searchThread.start();
-        }
+        searchThread.start();
+    }
 
-        public void stopScanning() {
-            try {
-                searchThread.join();
+    public void stopScanning() {
+        try {
+            searchThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
