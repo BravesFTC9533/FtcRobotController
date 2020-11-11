@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.common;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Robot {
@@ -35,12 +36,13 @@ public class Robot {
         this.rightMotors = new DcMotorEx[] { frontRight, backRight };
         this.leftMotors = new DcMotorEx[] { frontLeft, backLeft };
 
-        // TODO: Reverse two motors
+        this.frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         this.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
