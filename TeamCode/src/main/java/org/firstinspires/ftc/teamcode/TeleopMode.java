@@ -91,6 +91,8 @@ public class TeleopMode extends LinearOpMode implements FtcGamePad.ButtonHandler
             operatorGamePad.update();
 
             telemetry.addData("Drive Speed", drive.isHalfDriveSpeed() ? "Half" : "Full");
+            telemetry.addData("Brake Mode", robot.frontLeft.getZeroPowerBehavior() ==
+                    DcMotor.ZeroPowerBehavior.BRAKE ? "Brake" : "Float");
             telemetry.update();
         }
 
@@ -101,8 +103,14 @@ public class TeleopMode extends LinearOpMode implements FtcGamePad.ButtonHandler
     public void gamepadButtonEvent(FtcGamePad gamepad, int button, boolean pressed) {
         if(gamepad == driverGamePad) {
             switch (button) {
-                case FtcGamePad.GAMEPAD_B:
+                case FtcGamePad.GAMEPAD_A:
                     if(pressed) drive.toggleHalfDriveSpeed();
+                    break;
+                case FtcGamePad.GAMEPAD_B:
+                    if(pressed) {
+                        robot.setZeroPowerBehavior(robot.frontLeft.getZeroPowerBehavior() == DcMotor.ZeroPowerBehavior.BRAKE
+                                ? DcMotor.ZeroPowerBehavior.FLOAT : DcMotor.ZeroPowerBehavior.BRAKE);
+                    }
                     break;
             }
         }

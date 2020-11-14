@@ -39,10 +39,10 @@ public class Robot {
         this.frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         this.backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         this.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
@@ -69,5 +69,9 @@ public class Robot {
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
+    }
+
+    public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
+        for(DcMotorEx motor : allMotors) motor.setZeroPowerBehavior(zeroPowerBehavior);
     }
 }

@@ -54,6 +54,7 @@ public class AutonomousOpMode extends LinearOpMode {
 
         vuforiaManager = new VuforiaManager();
         vuforiaManager.initialize(this);
+        vuforiaManager.update();
 
         // Reset the encoders
         robot.setMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -63,5 +64,9 @@ public class AutonomousOpMode extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+
+        while(opModeIsActive()) {
+            vuforiaManager.update();
+        }
     }
 }
