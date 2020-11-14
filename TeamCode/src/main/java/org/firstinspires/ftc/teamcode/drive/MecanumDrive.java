@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.common.FtcGamePad;
 import org.firstinspires.ftc.teamcode.common.Robot;
+import org.firstinspires.ftc.teamcode.drive.vuforiaManagers.MecanumVuforiaDriveManager;
 
 
 /**
@@ -16,6 +17,8 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 
 // TODO: Implement Velocity instead of power
 public class MecanumDrive implements IDrive {
+
+    public final MecanumVuforiaDriveManager vuforiaDriveManager = new MecanumVuforiaDriveManager(this);
 
     private final LinearOpMode opMode;
     private final Robot robot;
