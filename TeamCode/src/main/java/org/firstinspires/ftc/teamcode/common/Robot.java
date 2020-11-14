@@ -39,10 +39,10 @@ public class Robot {
         this.frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         this.backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         this.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }

@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.media.MediaPlayer;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -53,9 +55,7 @@ import org.firstinspires.ftc.teamcode.drive.MecanumDrive;
  */
 
 @TeleOp(name="Teleop", group="Competition")
-public class TeleOpMode extends LinearOpMode implements FtcGamePad.ButtonHandler {
-
-    private ElapsedTime runtime = new ElapsedTime();
+public class TeleopMode extends LinearOpMode implements FtcGamePad.ButtonHandler {
 
     private Robot robot;
     private MecanumDrive drive;
@@ -81,7 +81,6 @@ public class TeleOpMode extends LinearOpMode implements FtcGamePad.ButtonHandler
         telemetry.update();
 
         waitForStart();
-        runtime.reset();
 
         // TODO: Add in the control list
 
@@ -91,9 +90,11 @@ public class TeleOpMode extends LinearOpMode implements FtcGamePad.ButtonHandler
             driverGamePad.update();
             operatorGamePad.update();
 
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Drive Speed", drive.isHalfDriveSpeed() ? "Half" : "Full");
             telemetry.update();
         }
+
+        robot.stop();
     }
 
     @Override
@@ -101,12 +102,7 @@ public class TeleOpMode extends LinearOpMode implements FtcGamePad.ButtonHandler
         if(gamepad == driverGamePad) {
             switch (button) {
                 case FtcGamePad.GAMEPAD_B:
-                    if(pressed) {
-                        drive.toggleHalfDriveSpeed();
-                        telemetry.addData("Drive Speed", drive.isHalfDriveSpeed() ? "HALF" : "FULL");
-                        telemetry.update();
-                        // TODO: Add sound effect!
-                    }
+                    if(pressed) drive.toggleHalfDriveSpeed();
                     break;
             }
         }
