@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.media.MediaPlayer;
+
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -100,6 +102,16 @@ public class TeleOpMode extends LinearOpMode implements FtcGamePad.ButtonHandler
 
     @Override
     public void gamepadButtonEvent(FtcGamePad gamepad, int button, boolean pressed) {
-        // TODO: Handle the operator gamepad.
+        if(gamepad == driverGamePad) {
+            switch (button) {
+                case FtcGamePad.GAMEPAD_B:
+                    if(pressed) {
+                        drive.toggleHalfDriveSpeed();
+                        telemetry.addData("Drive Speed", drive.isHalfDriveSpeed() ? "HALF" : "FULL");
+                        // TODO: Add sound effect!
+                    }
+                    break;
+            }
+        }
     }
 }

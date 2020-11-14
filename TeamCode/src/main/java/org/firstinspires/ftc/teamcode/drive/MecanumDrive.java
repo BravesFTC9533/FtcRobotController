@@ -28,6 +28,8 @@ public class MecanumDrive implements IDrive {
     private final DcMotor bl;
     private final DcMotor br;
 
+    private boolean halfDriveSpeed = false;
+
     public MecanumDrive(LinearOpMode opMode, Robot robot) {
         this.opMode = opMode;
         this.robot = robot;
@@ -51,9 +53,10 @@ public class MecanumDrive implements IDrive {
     public void handle(FtcGamePad driverGamepad){
         double h, v, r;
 
-        h = -driverGamepad.getLeftStickX();
+        h = -driverGamepad.getLeftStickX() + Math.pow(driverGamepad.getLeftTrigger(), 3)
+                - Math.pow(driverGamepad.getRightTrigger(), 3);
         v = -driverGamepad.getLeftStickY();
-        r = -driverGamepad.getRightStickX();
+        r = driverGamepad.getRightStickX();
 
         if(Math.abs(h) < MIN_SPEED) {
             h = 0;
@@ -65,15 +68,10 @@ public class MecanumDrive implements IDrive {
             r = 0;
         }
 
-        if(getIsReverse()) {
+        if(robot.isReverse()) {
             h *= -1;
             v *= -1;
         }
-
-
-        h = clipMotorPower(h);
-        v = clipMotorPower(v);
-        r = clipMotorPower(r);
 
         // add vectors
         double frontLeft =  v-h+r;
@@ -99,10 +97,15 @@ public class MecanumDrive implements IDrive {
             backRight = scalePower(backRight, max);
         }
 
-        fl.setPower(frontLeft);
-        fr.setPower(frontRight);
-        bl.setPower(backLeft);
-        br.setPower(backRight);
+//        fl.setVelocity(frontLeft * Robot.MAX_NEVE_VELOCITY);
+//        fr.setVelocity(frontRight * Robot.MAX_NEVE_VELOCITY);
+//        bl.setVelocity(backLeft * Robot.MAX_NEVE_VELOCITY);
+//        br.setVelocity(backRight * Robot.MAX_NEVE_VELOCITY);
+
+        fl.setPower(halfDriveSpeed ? frontLeft / 2 : frontLeft);
+        fr.setPower(halfDriveSpeed ? frontRight / 2 : frontRight);
+        bl.setPower(halfDriveSpeed ? backLeft / 2 : backLeft);
+        br.setPower(halfDriveSpeed ? backRight / 2 : backRight);
     }
 
     @Override
@@ -252,4 +255,14 @@ public class MecanumDrive implements IDrive {
         robot.stop();
         robot.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
+
+    public boolean isHalfDriveSpeed() {
+        return halfDriveSpeed;
+    }
+
+    public void setHalfDriveSpeed(boolean halfDriveSpeed) {
+        this.halfDriveSpeed = halfDriveSpeed;
+    }
+
+    public void toggleHalfDriveSpeed() { halfDriveSpeed = !halfDriveSpeed; }
 }
