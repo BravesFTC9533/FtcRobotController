@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.vuforiaManagers;
 
-import org.firstinspires.ftc.teamcode.VuforiaManager;
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.teamcode.drive.MecanumDrive;
 
 public class MecanumVuforiaDriveManager extends AbstractVuforiaDriveManager<MecanumDrive> {
@@ -10,7 +10,7 @@ public class MecanumVuforiaDriveManager extends AbstractVuforiaDriveManager<Meca
     }
 
     @Override
-    public void driveToCurrentTarget(VuforiaManager vuforiaManager, double distance) {
+    public void driveToCurrentTarget(OpenGLMatrix lastLocation, double distanceInches) {
 
     }
 }

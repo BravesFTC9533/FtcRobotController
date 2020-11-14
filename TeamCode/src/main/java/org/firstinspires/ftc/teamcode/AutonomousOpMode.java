@@ -67,6 +67,9 @@ public class AutonomousOpMode extends LinearOpMode {
 
         while(opModeIsActive()) {
             vuforiaManager.update();
+            if(vuforiaManager.isTargetVisible()) {
+                drive.vuforiaDriveManager.driveToCurrentTarget(vuforiaManager.getLastLocation(), 10);
+            }
         }
     }
 }

@@ -25,7 +25,6 @@ import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocaliz
 public class VuforiaManager {
 
     private LinearOpMode linearOpMode;
-    private boolean shouldScan = false;
 
     private static final VuforiaLocalizer.CameraDirection CAMERA_CHOICE = VuforiaLocalizer.CameraDirection.BACK;
     private static final boolean PHONE_IS_PORTRAIT = false;
@@ -56,9 +55,10 @@ public class VuforiaManager {
     public WebcamName webcamName = null;
 
     private boolean targetVisible = false;
-    private float phoneXRotate    = 0;
-    private float phoneYRotate    = 0;
-    private float phoneZRotate    = 0;
+
+    private static float phoneXRotate    = 0;
+    private static float phoneYRotate    = 0;
+    private static float phoneZRotate    = 0;
 
     public void initialize(LinearOpMode linearOpMode) {
         this.linearOpMode = linearOpMode;
@@ -242,7 +242,5 @@ public class VuforiaManager {
     }
 
     public OpenGLMatrix getLastLocation() { return lastLocation; }
-
-    public void setShouldScan(boolean value) { this.shouldScan = value; }
-    public boolean shouldScan() { return shouldScan; }
+    public boolean isTargetVisible() { return targetVisible; }
 }

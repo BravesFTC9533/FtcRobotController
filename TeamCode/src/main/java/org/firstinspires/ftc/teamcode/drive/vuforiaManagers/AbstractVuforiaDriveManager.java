@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.vuforiaManagers;
 
+import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.teamcode.VuforiaManager;
 import org.firstinspires.ftc.teamcode.drive.IDrive;
 
@@ -11,6 +12,6 @@ public abstract class AbstractVuforiaDriveManager<T extends IDrive> {
         this.drive = drive;
     }
 
-    public abstract void driveToCurrentTarget(VuforiaManager vuforiaManager, double distance);
+    public abstract void driveToCurrentTarget(OpenGLMatrix lastLocation, double distance);
 
 }
