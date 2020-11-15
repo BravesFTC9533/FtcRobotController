@@ -37,7 +37,7 @@ public class MecanumDrive extends AbstractDrive {
         this.br = robot.backRight;
 
         this.vuforiaDriveManager = new MecanumVuforiaDriveManager(this);
-        this.gyroDriveManager = new MecanumGyroDriveManager(this, robot.imu);
+        this.gyroDriveManager = new MecanumGyroDriveManager(this, opMode, robot.imu);
     }
 
     public boolean getIsReverse(){
