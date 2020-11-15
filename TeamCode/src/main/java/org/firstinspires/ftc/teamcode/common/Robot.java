@@ -7,9 +7,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Robot {
 
-    public static final int TARGET_TO_POSITION_TOLERANCE = 20;
+    public static final int MAX_VELOCITY = 3120; // Run the max velocity test to figure out
+    public static final int TARGET_TO_POSITION_TOLERANCE = 35;
 
-    public static final double WHEEL_DISTANCE_INCHES = 11.5;
+    public static final double ROBOT_LENGTH = 16.15; // Length in inches of the chassis eg.
 
     public static final double            COUNTS_PER_MOTOR_REV    = 28;              // eg: NeveRest Side motor
     public static final double            DRIVE_GEAR_REDUCTION    = 40.0 / 1.0;      // This is < 1.0 if geared UP

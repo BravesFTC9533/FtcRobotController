@@ -76,7 +76,7 @@ public class AutonomousOpMode extends LinearOpMode {
         runtime.reset();
         waitForStart();
 
-        drive.moveByInches(1, 15, 5);
+        drive.moveByInches(0.75, 25, 5);
 
         while(opModeIsActive()) {}
     }

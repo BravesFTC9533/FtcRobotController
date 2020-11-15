@@ -7,26 +7,25 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @TeleOp(name="Max Velocity", group="Util Opmode")
+@Disabled
 public class MaxVelocityTest extends LinearOpMode {
 
-    DcMotorEx motor;
-    double currentVelocity;
-    double maxVelocity = 0.0;
-
     @Override
-
     public void runOpMode() {
+
+        double maxVelocity = 0.0;
+        double currentVelocity;
 
         telemetry.addData("Status", "Initializing");
         telemetry.update();
 
-        motor = hardwareMap.get(DcMotorEx.class, "front_left");
+        DcMotorEx motor = hardwareMap.get(DcMotorEx.class, "front_left");
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        telemetry.addLine("Motor labeled fl on start will rotate at max power.");
-        telemetry.addLine("Disclaimer: Make sure that the battery is charged");
+        telemetry.addLine("Motor labeled front_left on start will rotate at max power.");
+        telemetry.addLine("Disclaimer: Make sure that the battery is charged!!!!");
         telemetry.update();
 
         waitForStart();

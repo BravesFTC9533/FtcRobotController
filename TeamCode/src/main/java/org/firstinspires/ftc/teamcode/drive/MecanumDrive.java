@@ -232,7 +232,7 @@ public class MecanumDrive implements IDrive {
     }
 
     public void turnDegrees(TurnDirection direction, int degrees, double power, double timeoutSeconds) {
-        double inchesPerDegree = Robot.WHEEL_DISTANCE_INCHES / 90; // Find how many inches are in a degree
+        double inchesPerDegree = Robot.ROBOT_LENGTH / 90; // Find how many inches are in a degree
         degrees *= inchesPerDegree;
 
         if(direction == TurnDirection.COUNTER_CLOCKWISE) {
