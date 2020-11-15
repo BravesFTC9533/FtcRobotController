@@ -56,6 +56,9 @@ public class AutonomousOpMode extends LinearOpMode {
     public void runOpMode() {
         ranAutonomous = true;
 
+        telemetry.addData("Status", "Initializing! Don't press play!");
+        telemetry.update();
+
         robot = new Robot(hardwareMap);
         drive = new MecanumDrive(this, robot);
 
@@ -67,16 +70,15 @@ public class AutonomousOpMode extends LinearOpMode {
         robot.setMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Status", "Initialized! Good Luck!!!");
         telemetry.update();
 
         runtime.reset();
         waitForStart();
 
-        drive.moveByInches(1, 20, 7);
+        drive.moveByInches(1, 15, 5);
 
         while(opModeIsActive()) {}
-
     }
 
     private void delay(int mills) {
