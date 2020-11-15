@@ -32,12 +32,19 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.common.Robot;
+import org.firstinspires.ftc.teamcode.drive.IDrive;
 import org.firstinspires.ftc.teamcode.drive.MecanumDrive;
+
+import java.util.concurrent.TimeUnit;
 
 @Autonomous(name="Bravenators Autonomous", group="Competition")
 public class AutonomousOpMode extends LinearOpMode {
+
+    private ElapsedTime runtime = new ElapsedTime();
 
     public static boolean ranAutonomous = false;
 
@@ -63,13 +70,18 @@ public class AutonomousOpMode extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        runtime.reset();
         waitForStart();
 
-        while(opModeIsActive()) {
-            vuforiaManager.update();
-            if(vuforiaManager.isTargetVisible()) {
-                drive.vuforiaDriveManager.driveToCurrentTarget(vuforiaManager.getLastLocation(), 10);
-            }
-        }
+        drive.moveByInches(1, 20, 7);
+
+        while(opModeIsActive()) {}
+
     }
+
+    private void delay(int mills) {
+        runtime.reset();
+        while(opModeIsActive() && mills <= runtime.time(TimeUnit.MILLISECONDS)) {}
+    }
+
 }

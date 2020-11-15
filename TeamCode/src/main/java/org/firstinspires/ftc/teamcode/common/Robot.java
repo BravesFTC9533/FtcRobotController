@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Robot {
 
-    public static final double WHEEL_DISTANCE_INCHES = 18.1;
+    public static final double WHEEL_DISTANCE_INCHES = 11.5;
 
-    public static final double            NEVE_COUNTS_PER_MOTOR_REV = 1120;      // eg: NeveRest Side motor
-    public static final double            DRIVE_GEAR_REDUCTION    = 45.0 / 35.0;             // This is < 1.0 if geared UP
-    public static final double            WHEEL_DIAMETER_INCHES   = 5.250;           // For figuring circumference
-    public static final double     COUNTS_PER_INCH = (NEVE_COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+    public static final double            COUNTS_PER_MOTOR_REV    =    28;      // eg: NeveRest Side motor
+    public static final double            DRIVE_GEAR_REDUCTION    =   1.0;      // This is < 1.0 if geared UP
+    public static final double            WHEEL_DIAMETER_INCHES   =  2.95;      // For figuring circumference
+    public static final double     COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * Math.PI);
 
     public final DcMotorEx frontLeft;
