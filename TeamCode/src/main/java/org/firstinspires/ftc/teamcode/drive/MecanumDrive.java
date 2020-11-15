@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.common.FtcGamePad;
 import org.firstinspires.ftc.teamcode.common.Robot;
+import org.firstinspires.ftc.teamcode.drive.gyroManagers.MecanumGyroDriveManager;
 import org.firstinspires.ftc.teamcode.drive.vuforiaManagers.MecanumVuforiaDriveManager;
 
 
@@ -17,20 +18,23 @@ import org.firstinspires.ftc.teamcode.drive.vuforiaManagers.MecanumVuforiaDriveM
 
 public class MecanumDrive implements IDrive {
 
-    public final MecanumVuforiaDriveManager vuforiaDriveManager = new MecanumVuforiaDriveManager(this);
+    // Drive Managers
+    public final MecanumVuforiaDriveManager vuforiaDriveManager;    // Controls the vuforia autonomous drive.
+    public final MecanumGyroDriveManager gyroDriveManager;          // Controls the gyro autonomous drive.
 
-    private final LinearOpMode opMode;
-    private final Robot robot;
+    private final LinearOpMode opMode;  // Needed to control time.
+    private final Robot robot;          // Needed to get the motors from the robot class.
 
-    private static final double MIN_SPEED = 0.2;
-    protected static final float mmPerInch        = 25.4f;
+    private static final double MIN_SPEED       = 0.2;
+    protected static final float mmPerInch      = 25.4f;
 
+    // Motors
     private final DcMotorEx fl;
     private final DcMotorEx fr;
     private final DcMotorEx bl;
     private final DcMotorEx br;
 
-    private boolean halfDriveSpeed = false;
+    private boolean halfDriveSpeed = false; // If true, teleop driving will be half speed.
 
     public MecanumDrive(LinearOpMode opMode, Robot robot) {
         this.opMode = opMode;
@@ -39,6 +43,9 @@ public class MecanumDrive implements IDrive {
         this.fr = robot.frontRight;
         this.bl = robot.backLeft;
         this.br = robot.backRight;
+
+        this.vuforiaDriveManager = new MecanumVuforiaDriveManager(this);
+        this.gyroDriveManager = new MecanumGyroDriveManager(this, robot.imu);
     }
 
     public boolean getIsReverse(){
