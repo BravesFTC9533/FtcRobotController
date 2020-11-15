@@ -63,6 +63,7 @@ public class Robot {
         parameters.loggingEnabled       = true;
         parameters.loggingTag           = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        parameters.gyroBandwidth = BNO055IMU.GyroBandwidth.HZ523;
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);

@@ -34,7 +34,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.common.Robot;
+import org.firstinspires.ftc.teamcode.drive.AbstractDrive;
 import org.firstinspires.ftc.teamcode.drive.MecanumDrive;
 
 import java.util.concurrent.TimeUnit;
@@ -74,14 +79,7 @@ public class AutonomousOpMode extends LinearOpMode {
         runtime.reset();
         waitForStart();
 
-        drive.moveByInches(0.75, 25, 5);
-
-        while(opModeIsActive()) {}
-    }
-
-    private void delay(int mills) {
-        runtime.reset();
-        while(opModeIsActive() && mills <= runtime.time(TimeUnit.MILLISECONDS)) {}
+        drive.gyroDriveManager.turnDegrees(AbstractDrive.TurnDirection.CLOCKWISE, 0.25, 90, 5);
     }
 
 }

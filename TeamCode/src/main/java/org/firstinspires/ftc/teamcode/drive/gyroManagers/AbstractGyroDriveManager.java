@@ -18,5 +18,5 @@ public abstract class AbstractGyroDriveManager<T extends AbstractDrive> {
     }
 
     public abstract void moveByInches(double power, double inches, double timeoutSeconds);
-
+    public abstract void turnDegrees(AbstractDrive.TurnDirection turnDirection, double power, int degrees, double timeoutSeconds);
 }

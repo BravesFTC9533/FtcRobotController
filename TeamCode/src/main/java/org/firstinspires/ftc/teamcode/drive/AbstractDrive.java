@@ -28,7 +28,7 @@ public abstract class AbstractDrive {
         this.opMode = opMode;
     }
 
-    enum TurnDirection {
+    public enum TurnDirection {
         CLOCKWISE,
         COUNTER_CLOCKWISE
     }
