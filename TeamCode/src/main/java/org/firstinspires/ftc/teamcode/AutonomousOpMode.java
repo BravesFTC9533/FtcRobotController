@@ -79,7 +79,7 @@ public class AutonomousOpMode extends LinearOpMode {
         runtime.reset();
         waitForStart();
 
-        drive.gyroDriveManager.turnDegrees(AbstractDrive.TurnDirection.CLOCKWISE, 0.25, 90, 5);
+        drive.turnDegrees(AbstractDrive.TurnDirection.CLOCKWISE, 90, 0.5, 10);
     }
 
 }
