@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode.drive.gyroManagers;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 
-import org.firstinspires.ftc.teamcode.drive.IDrive;
+import org.firstinspires.ftc.teamcode.drive.AbstractDrive;
 
-public abstract class AbstractGyroDriveManager<T extends IDrive> {
+public abstract class AbstractGyroDriveManager<T extends AbstractDrive> {
 
     protected T drive;
     protected BNO055IMU imu;

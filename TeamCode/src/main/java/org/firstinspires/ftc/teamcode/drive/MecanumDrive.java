@@ -16,14 +16,7 @@ import org.firstinspires.ftc.teamcode.drive.vuforiaManagers.MecanumVuforiaDriveM
  * Created by 9533 on 2/3/2018.
  */
 
-public class MecanumDrive implements IDrive {
-
-    // Drive Managers
-    public final MecanumVuforiaDriveManager vuforiaDriveManager;    // Controls the vuforia autonomous drive.
-    public final MecanumGyroDriveManager gyroDriveManager;          // Controls the gyro autonomous drive.
-
-    private final LinearOpMode opMode;  // Needed to control time.
-    private final Robot robot;          // Needed to get the motors from the robot class.
+public class MecanumDrive extends AbstractDrive {
 
     private static final double MIN_SPEED       = 0.2;
     protected static final float mmPerInch      = 25.4f;
@@ -37,8 +30,7 @@ public class MecanumDrive implements IDrive {
     private boolean halfDriveSpeed = false; // If true, teleop driving will be half speed.
 
     public MecanumDrive(LinearOpMode opMode, Robot robot) {
-        this.opMode = opMode;
-        this.robot = robot;
+        super(opMode, robot);
         this.fl = robot.frontLeft;
         this.fr = robot.frontRight;
         this.bl = robot.backLeft;
