@@ -15,7 +15,6 @@ import org.firstinspires.ftc.teamcode.drive.vuforiaManagers.MecanumVuforiaDriveM
  * Created by 9533 on 2/3/2018.
  */
 
-// TODO: Implement Velocity instead of power
 public class MecanumDrive implements IDrive {
 
     public final MecanumVuforiaDriveManager vuforiaDriveManager = new MecanumVuforiaDriveManager(this);
