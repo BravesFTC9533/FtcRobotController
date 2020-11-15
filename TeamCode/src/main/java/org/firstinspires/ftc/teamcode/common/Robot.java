@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.common;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -22,6 +23,8 @@ public class Robot {
     public final DcMotorEx frontRight;
     public final DcMotorEx backLeft;
     public final DcMotorEx backRight;
+
+    public final BNO055IMU imu;
 
     public final DcMotorEx[] allMotors;
     public final DcMotorEx[] leftMotors;
@@ -51,6 +54,8 @@ public class Robot {
         this.frontRight.setTargetPositionTolerance(TARGET_TO_POSITION_TOLERANCE);
         this.backLeft.setTargetPositionTolerance(TARGET_TO_POSITION_TOLERANCE);
         this.backRight.setTargetPositionTolerance(TARGET_TO_POSITION_TOLERANCE);
+
+        
 
         this.setMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
