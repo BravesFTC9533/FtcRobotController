@@ -26,10 +26,10 @@ public class MecanumDrive implements IDrive {
     private static final double MIN_SPEED = 0.2;
     protected static final float mmPerInch        = 25.4f;
 
-    private final DcMotor fl;
-    private final DcMotor fr;
-    private final DcMotor bl;
-    private final DcMotor br;
+    private final DcMotorEx fl;
+    private final DcMotorEx fr;
+    private final DcMotorEx bl;
+    private final DcMotorEx br;
 
     private boolean halfDriveSpeed = false;
 
@@ -100,15 +100,10 @@ public class MecanumDrive implements IDrive {
             backRight = scalePower(backRight, max);
         }
 
-//        fl.setVelocity(frontLeft * Robot.MAX_NEVE_VELOCITY);
-//        fr.setVelocity(frontRight * Robot.MAX_NEVE_VELOCITY);
-//        bl.setVelocity(backLeft * Robot.MAX_NEVE_VELOCITY);
-//        br.setVelocity(backRight * Robot.MAX_NEVE_VELOCITY);
-
-        fl.setPower(halfDriveSpeed ? frontLeft / 2 : frontLeft);
-        fr.setPower(halfDriveSpeed ? frontRight / 2 : frontRight);
-        bl.setPower(halfDriveSpeed ? backLeft / 2 : backLeft);
-        br.setPower(halfDriveSpeed ? backRight / 2 : backRight);
+        fl.setVelocity(halfDriveSpeed ? frontLeft * Robot.MAX_VELOCITY / 2 : frontLeft * Robot.MAX_VELOCITY);
+        fr.setVelocity(halfDriveSpeed ? frontRight * Robot.MAX_VELOCITY / 2 : frontRight * Robot.MAX_VELOCITY);
+        bl.setVelocity(halfDriveSpeed ? backLeft * Robot.MAX_VELOCITY / 2 : backLeft * Robot.MAX_VELOCITY);
+        br.setVelocity(halfDriveSpeed ? backRight * Robot.MAX_VELOCITY / 2 : backRight * Robot.MAX_VELOCITY);
     }
 
     @Override
@@ -137,19 +132,19 @@ public class MecanumDrive implements IDrive {
             backRight = scalePower(backRight, max);
         }
 
-        fl.setPower(frontLeft);
-        fr.setPower(frontRight);
-        bl.setPower(backLeft);
-        br.setPower(backRight);
+        fl.setVelocity(frontLeft * Robot.MAX_VELOCITY);
+        fr.setVelocity(frontRight * Robot.MAX_VELOCITY);
+        bl.setVelocity(backLeft * Robot.MAX_VELOCITY);
+        br.setVelocity(backRight * Robot.MAX_VELOCITY);
 
     }
 
     @Override
     public void drive(double left, double right) {
-        fl.setPower(left);
-        bl.setPower(left);
-        br.setPower(right);
-        fr.setPower(right);
+        fl.setVelocity(left * Robot.MAX_VELOCITY);
+        bl.setVelocity(left * Robot.MAX_VELOCITY);
+        br.setVelocity(right * Robot.MAX_VELOCITY);
+        fr.setVelocity(right * Robot.MAX_VELOCITY);
     }
 
     @Override
@@ -213,7 +208,7 @@ public class MecanumDrive implements IDrive {
 
     public void setMotorsPowers(DcMotorEx[] motors, double power) {
         for(DcMotorEx motor : motors) {
-            motor.setPower(power);
+            motor.setVelocity(power * Robot.MAX_VELOCITY);
         }
     }
 
